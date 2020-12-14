@@ -11,7 +11,7 @@ namespace cabInvoiceDemo
             INVALID_RIDE_TYPE,
             INVALID_DISTANCE,
             INVALID_TIME,
-            INVALID_RIDES,
+            NULL_RIDES,
             INVALID_USER_ID
         }
         ExceptionType type;

@@ -31,10 +31,12 @@ namespace cabInvoiceTEst
             Ride[] rides = {new Ride(4.0,10),
                             new Ride(1.0,1)};
 
-            double expectedFare = 61;
-            double actualFare = invoiceGenerator.CalculateTotalFare(rides);
-            Assert.AreEqual(expectedFare, actualFare);
+            InvoiceSummary invoiceSummary = invoiceGenerator.CalculateTotalFare(rides);
+            InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 61);
+            Assert.AreEqual(expectedInvoiceSummary, invoiceSummary);
         }
+
+       
 
 
     }
