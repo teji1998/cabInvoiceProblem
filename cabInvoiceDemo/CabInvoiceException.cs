@@ -15,7 +15,7 @@ namespace cabInvoiceDemo
             INVALID_USER_ID
         }
         ExceptionType type;
-        public CabInvoiceException(ExceptionType type, string message)
+        public CabInvoiceException(ExceptionType type, string message) :base(message)
         {
             this.type = type;
         }
