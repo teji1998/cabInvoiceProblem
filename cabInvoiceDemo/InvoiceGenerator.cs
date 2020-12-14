@@ -33,6 +33,7 @@ namespace cabInvoiceDemo
         public InvoiceGenerator(RideType rideType)
         {
             this.rideType = rideType;
+
             if (rideType.Equals(RideType.NORMAL))
             {
                 this.COST_PER_KILOMETER = 10;

@@ -142,10 +142,7 @@ namespace cabInvoiceTEst
         public void givenUserId_WhenAbsent_ShouldThrowAnException()
         {
             invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
-            rideList = new List<Ride> { null };
-
             var result = Assert.Throws<CabInvoiceException>(() => invoiceGenerator.GetUserInvoice(1));
-
             Assert.AreEqual(CabInvoiceException.ExceptionType.INVALID_USER_ID, result.type);
         }
 
