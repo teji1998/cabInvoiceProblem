@@ -18,9 +18,9 @@ namespace cabInvoiceTEst
         [Test]
         public void givenDistanceAndTime_WhenCalculated_ShouldReturnTotalFare()
         {
-            double distance = 3.0;
+            double distance = 4.0;
             int time = 10;
-            double expectedFare = 40;
+            double expectedFare = 50;
             double actualFare = invoiceGenerator.CalculateFare(distance, time);
             Assert.AreEqual(expectedFare, actualFare);
         }
