@@ -17,6 +17,9 @@ namespace cabInvoiceTEst
             invoiceGenerator = new InvoiceGenerator();
         }
 
+        /// <summary>
+        /// Givens the distance and time when calculated should give fare.
+        /// </summary>
         [Test]
         public void givenDistanceAndTime_WhenCalculated_ShouldGiveFare()
         {
@@ -28,6 +31,9 @@ namespace cabInvoiceTEst
             Assert.AreEqual(70, fare);
         }
 
+        /// <summary>
+        /// Givens the distance and time should return premium calculate the fare.
+        /// </summary>
         [Test]
         public void givenDistanceAndTime_ShouldReturnPremiumCalculateTheFare()
         {
@@ -38,6 +44,9 @@ namespace cabInvoiceTEst
             Assert.AreEqual(result, 40);
         }
 
+        /// <summary>
+        /// Givens the list of rides when calculated should give total fare.
+        /// </summary>
         [Test]
         public void givenListOfRides_WhenCalculated_ShouldGiveTotalFare()
         {
@@ -48,7 +57,10 @@ namespace cabInvoiceTEst
             Assert.AreEqual(145, fare);
 
         }
-        
+
+        /// <summary>
+        /// Givens the list of rides when calculated should return invoice information.
+        /// </summary>
         [Test]
         public void givenListOfRides_WhenCalculated_ShouldReturnInvoiceInformation()
         {
@@ -61,8 +73,10 @@ namespace cabInvoiceTEst
 
             Assert.IsTrue(info.numberOfRides == expectedRides && info.totalFare == expectedFare && info.averageFare == expectedAverage);
         }
-      
-     
+
+        /// <summary>
+        /// Givens the user identifier when checked if present should return invoice information.
+        /// </summary>
         [Test]
         public void givenUserId_WhenCheckedIfPresent_ShouldReturnInvoiceInfo()
         {

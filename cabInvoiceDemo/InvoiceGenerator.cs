@@ -15,6 +15,7 @@ namespace cabInvoiceDemo
 
         InvoiceSummary invoiceSummary = null;
         RideRepository rideRepository = null;
+
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -23,6 +24,12 @@ namespace cabInvoiceDemo
             invoiceSummary = new InvoiceSummary();
             rideRepository = new RideRepository();
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InvoiceGenerator"/> class.
+        /// </summary>
+        /// <param name="rideType">Type of the ride.</param>
+        /// <exception cref="CabInvoiceException">Ride type is Invalid</exception>
         public InvoiceGenerator(RideType rideType)
         {
             this.rideType = rideType;
@@ -44,7 +51,18 @@ namespace cabInvoiceDemo
             }
         }
 
-        
+        /// <summary>
+        /// Calculates the fare.
+        /// </summary>
+        /// <param name="ride">The ride.</param>
+        /// <returns></returns>
+        /// <exception cref="CabInvoiceException">
+        /// There is no ride
+        /// or
+        /// Distance is not valid
+        /// or
+        /// Time is valid
+        /// </exception>
         public double CalculateFare(Ride ride)
         {
             if (ride == null)
@@ -63,7 +81,12 @@ namespace cabInvoiceDemo
             double fare = (ride.distance * COST_PER_KILOMETER) + (ride.time * COST_PER_MINUTE);
             return Math.Max(fare, MINIMUM_FARE);
         }
-       
+
+        /// <summary>
+        /// Calculates the fare for multiple rides.
+        /// </summary>
+        /// <param name="rideList">The ride list.</param>
+        /// <returns></returns>
         public double CalculateFareForMultipleRides(List<Ride> rideList)
         {
             this.totalFare = 0;
@@ -73,7 +96,12 @@ namespace cabInvoiceDemo
             }
             return this.totalFare;
         }
-        
+
+        /// <summary>
+        /// Gets the invoice summary.
+        /// </summary>
+        /// <param name="rideList">The ride list.</param>
+        /// <returns></returns>
         public CabInfo GetInvoiceSummary(List<Ride> rideList)
         {
             double fare = CalculateFareForMultipleRides(rideList);
