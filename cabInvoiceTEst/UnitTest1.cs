@@ -21,15 +21,23 @@ namespace cabInvoiceTEst
         public void givenDistanceAndTime_WhenCalculated_ShouldGiveFare()
         {
             double distance = 5; 
-            int time = 20;   
-
+            int time = 20;
+            invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
             double fare = invoiceGenerator.CalculateFare(new Ride(distance, time));
 
             Assert.AreEqual(70, fare);
         }
 
-       
-        
+        [Test]
+        public void givenDistanceAndTime_ShouldReturnPremiumCalculateTheFare()
+        {
+            double distance = 2.0;
+            int time = 5;
+            invoiceGenerator = new InvoiceGenerator(RideType.PREMIUM);
+            double result = invoiceGenerator.CalculateFare(new Ride(distance, time));
+            Assert.AreEqual(result, 40);
+        }
+
         [Test]
         public void givenListOfRides_WhenCalculated_ShouldGiveTotalFare()
         {

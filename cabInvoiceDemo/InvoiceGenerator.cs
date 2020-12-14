@@ -11,14 +11,37 @@ namespace cabInvoiceDemo
         readonly int COST_PER_MINUTE = 1;
         readonly int MINIMUM_FARE = 5;
         double totalFare;
+        RideType rideType;
 
-        InvoiceSummary invoiceSummary = new InvoiceSummary();
-        RideRepository rideRepository = new RideRepository();
+        InvoiceSummary invoiceSummary = null;
+        RideRepository rideRepository = null;
         /// <summary>
         /// Default constructor
         /// </summary>
         public InvoiceGenerator()
         {
+            invoiceSummary = new InvoiceSummary();
+            rideRepository = new RideRepository();
+        }
+        public InvoiceGenerator(RideType rideType)
+        {
+            this.rideType = rideType;
+            if (rideType.Equals(RideType.NORMAL))
+            {
+                this.COST_PER_KILOMETER = 10;
+                this.COST_PER_MINUTE = 1;
+                this.MINIMUM_FARE = 5;
+            }
+            else if (rideType.Equals(RideType.PREMIUM))
+            {
+                this.COST_PER_KILOMETER = 15;
+                this.COST_PER_MINUTE = 2;
+                this.MINIMUM_FARE = 20;
+            }
+            else
+            {
+                throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVALID_RIDE_TYPE, "Ride type is Invalid");
+            }
         }
 
         
