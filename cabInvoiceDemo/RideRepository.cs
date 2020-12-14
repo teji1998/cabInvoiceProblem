@@ -38,7 +38,12 @@ namespace cabInvoiceDemo
 
         }
 
-       
+        /// <summary>
+        /// Gets the rides and puts it into list.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="CabInvoiceException">Invalid UserID</exception>
         public List<Ride> GetRides(int userId)
         {
             try
