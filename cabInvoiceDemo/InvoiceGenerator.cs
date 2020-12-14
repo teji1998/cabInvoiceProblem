@@ -75,7 +75,7 @@ namespace cabInvoiceDemo
             }
             if (ride.time <= 0)
             {
-                throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVALID_TIME, "Time is valid");
+                throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVALID_TIME, "Time is not valid");
             }
 
             double fare = (ride.distance * COST_PER_KILOMETER) + (ride.time * COST_PER_MINUTE);

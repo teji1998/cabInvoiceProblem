@@ -21,7 +21,7 @@ namespace cabInvoiceTEst
         /// Givens the distance and time when calculated should give fare.
         /// </summary>
         [Test]
-        public void givenDistanceAndTime_WhenCalculated_ShouldGiveFare()
+        public void givenDistanceAndTime_WhenCalculated_ShouldGiveNormalCalCulatedFare()
         {
             double distance = 5; 
             int time = 20;
@@ -29,6 +29,42 @@ namespace cabInvoiceTEst
             double fare = invoiceGenerator.CalculateFare(new Ride(distance, time));
 
             Assert.AreEqual(70, fare);
+        }
+
+        /// <summary>
+        /// Givens the minimum distance and minimum time when calculated should return minimum fare.
+        /// </summary>
+        [Test]
+        public void givenMinimumDistanceAndMinimumTime_WhenCalculated_ShouldReturnMinimumFare()
+        {
+            double distance = 0.2;
+            int time = 1;
+            double result = invoiceGenerator.CalculateFare(new Ride(distance, time));
+            Assert.AreEqual(result, 5);
+        }
+
+        /// <summary>
+        /// Givens the invalid distance and valid time when calculated should throw an exception.
+        /// </summary>
+        [Test]
+        public void givenInvalidDistanceAndValidTime_WhenCalculated_ShouldThrowAnException()
+        {
+            double distance = -3;
+            int time = 10;
+            var result = Assert.Throws<CabInvoiceException>(() => invoiceGenerator.CalculateFare(new Ride(distance, time)));
+            Assert.AreEqual(CabInvoiceException.ExceptionType.INVALID_DISTANCE, result.type);
+        }
+
+        /// <summary>
+        /// Givens the valid distance and invalid time when calculated should throw exception.
+        /// </summary>
+        [Test]
+        public void givenValidDistanceAndInvalidTime_WhenCalculated_ShouldThrowException()
+        {
+            double distance = 3;
+            int time = -10;
+            var result = Assert.Throws<CabInvoiceException>(() => invoiceGenerator.CalculateFare(new Ride(distance, time)));
+            Assert.AreEqual(CabInvoiceException.ExceptionType.INVALID_TIME, result.type);
         }
 
         /// <summary>
@@ -56,6 +92,14 @@ namespace cabInvoiceTEst
 
             Assert.AreEqual(145, fare);
 
+        }
+
+        [Test]
+        public void givenNullRides_WhenCalculated_ShouldThrowException()
+        {
+            rideList = new List<Ride> { new Ride(5, 20), null, new Ride(2, 10) };
+            var result = Assert.Throws<CabInvoiceException>(() => invoiceGenerator.CalculateFareForMultipleRides(rideList));
+            Assert.AreEqual(CabInvoiceException.ExceptionType.NULL_RIDES, result.type);
         }
 
         /// <summary>
@@ -90,7 +134,20 @@ namespace cabInvoiceTEst
 
             Assert.IsTrue(info.numberOfRides == expectedRides && info.totalFare == expectedFare && info.averageFare == expectedAverage);
         }
-        
+
+        /// <summary>
+        /// Givens the user identifier when absent should throw an exception.
+        /// </summary>
+        [Test]
+        public void givenUserId_WhenAbsent_ShouldThrowAnException()
+        {
+            invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
+            rideList = new List<Ride> { null };
+
+            var result = Assert.Throws<CabInvoiceException>(() => invoiceGenerator.GetUserInvoice(1));
+
+            Assert.AreEqual(CabInvoiceException.ExceptionType.INVALID_USER_ID, result.type);
+        }
 
 
     }
