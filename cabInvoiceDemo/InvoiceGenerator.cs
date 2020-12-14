@@ -98,5 +98,15 @@ namespace cabInvoiceDemo
             double totalFare = distance * COST_PER_KILOMETER + time * COST_PER_MINUTE;
             return Math.Max(totalFare, MINIMUM_FARE);
         }
+
+        public double CalculateTotalFare(Ride[] rides)
+        {
+            double totalFare = 0;
+            foreach (Ride ride in rides)
+            {
+                totalFare =totalFare + this.CalculateFare(ride.distance, ride.time);
+            }
+            return totalFare;
+        }
     }
 }
